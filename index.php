@@ -4,7 +4,7 @@
 	<title></title>
 </head>
 <body>
-	<h1>1234</h1>
+	<h1>Sua code roi nhe</h1>
 	<?php
 		echo "<p>day la php</p>";
 		$name = "Rich";
