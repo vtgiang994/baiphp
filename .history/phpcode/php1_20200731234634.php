@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<h1>Commit code from AN</h1>
+	<h1>This is a test of PHP code</h1>
 	<h1>This is a test of PHP code</h1>
 	<?php
 	echo "<p>This text was dynamically generated!</p>";

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>POST GET</title>
 </head>
-
 <body>
-	<h1>Commit code from AN</h1>
+<h1>This is a test of PHP code</h1>
 	<h1>This is a test of PHP code</h1>
 	<?php
 	echo "<p>This text was dynamically generated!</p>";
@@ -15,27 +13,26 @@
 	if (isset($_POST['Trang'])) {
 		$Trang = $_POST['Trang'];
 		echo "Trang số: $Trang <br>";
+
 	}
 	?>
 	<div>
 		<form method="post" action="">
 			Trang:
-			<input type="text" name="Trang" value="" /><br>
+			<input type="text" name="Trang" value=""/><br>
 			IPP:
-			<input type="text" name="IPP" value="" />
-			<input type="submit" name="cal" value="Nhập" />
-		</form>
+			<input type="text" name="IPP" value=""/>
+			<input type="submit" name="cal" value="Nhập"/>
+		</form> 
 	</div>
 	<h1>Testing PHP OOP setters and getters</h1>
 	<?php
-	class Product
-	{
+	class Product {
 		private $description;
 		private $price;
 		private $inventory;
 		private $onsale;
-		public function __set($name, $value)
-		{
+		public function __set($name, $value) {
 			if ($name == "price" && $value < 0) {
 				echo "<p>Invalid price set<p>\n";
 				$this->price = 0;
@@ -45,12 +42,10 @@
 				$this->$name = $value;
 			}
 		}
-		public function __get($name)
-		{
+		public function __get($name) {
 			return $this->$name;
 		}
-		public function buyProduct($amount)
-		{
+		public function buyProduct($amount) {
 			if ($this->inventory >= $amount) {
 				$this->inventory -= $amount;
 			} else {
@@ -77,5 +72,4 @@
 	echo "<p>Inventory of $prod1->description is now: $prod1->inventory</p>\n";
 	?>
 </body>
-
 </html>
