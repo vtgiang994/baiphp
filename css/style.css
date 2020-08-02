@@ -1,0 +1,9 @@
+table, th, td ,tr {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width:30%;
+}
+.letrai {border-left:1px solid #222;}
+.keduoi {border-bottom:1px solid #222;}
+.ketren {border-top:1px solid #222;}
+.lephai {border-right:1px solid #222;}
