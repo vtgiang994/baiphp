@@ -1,4 +1,5 @@
 <?php
+$product = false;
 // Khi co action Save
 if (isset($_POST["save"])) {
     var_dump($_POST);
@@ -7,13 +8,34 @@ if (isset($_POST["save"])) {
     $pInventory = $_POST["pInventory"];
     $pPrice = $_POST["pPrice"];
     $pSale = isset($_POST["pSale"]) ? $_POST["pSale"] : 0;
-    $query = "INSERT into product (description,price,inventory,sale) values ('$pName', '$pPrice', '$pInventory', '$pSale')";
+    // if (isset($_POST["pSave"])) {
+    //     $pSale = $_POST["pSale"];
+    // } else {
+    //     $pSale = 0;
+    // }
+    if (isset($_GET["pid"])) {
+        $pid = (int) $_GET["pid"];
+        $query = "UPDATE product set description = '$pName',price = '$pPrice', inventory = '$pInventory',sale = '$pSale' where id = " . $pid;
+    } else {
+        $query = "INSERT into product (description,price,inventory,sale) values ('$pName', '$pPrice', '$pInventory', '$pSale')";
+    }
+    
     echo $query;
     $dbresult = $db->query($query);
     
     if (!$dbresult) {
         echo "loi rui";
         var_dump($dbresult);    
+    }
+} else {
+    
+    if (isset($_GET["pid"])) {
+        $db = new mysqli("localhost", "root","","test");
+        $pid = (int) $_GET["pid"];
+        $query = "SELECT * from product where id = ". $pid;
+        $result = $db->query($query);
+        $product = $result->fetch_row();
+        var_dump($product);
     }
 }
 ?>
@@ -55,23 +77,24 @@ if (isset($_POST["save"])) {
         <form name="product-create" method="POST" action="">
             <div class="form-group row">
                 <label for="productName" class="col-2">Name</label>
-                <input type="text" name="pName" value="" class="col-4">
+                <input type="text" name="pName" value="<?php echo $product ? $product[1] : ""; ?>" class="col-4">
             </div>
             <div class="form-group row">
                 <label for="productName" class="col-2">Price</label>
-                <input type="text" name="pPrice" value="" class="col-4">
+                <input type="text" name="pPrice" value="<?php echo $product ? $product[2] : ""; ?>" class="col-4">
             </div>
             <div class="form-group row">
                 <label for="productName" class="col-2">Inventory</label>
-                <input type="text" name="pInventory" value="" class="col-4">
+                <input type="text" name="pInventory" value="<?php echo $product ? $product[3] : ""; ?>" class="col-4">
             </div>
             <div class="form-group row">
                 <label for="productName" class="col-2">Sale</label>
-                <input type="checkbox" name="pSale" value="1">
+                <input type="checkbox" name="pSale" value="1" <?php echo ($product && $product[4] == 1) ? "checked" : ""; ?>>
             </div>
             <div>
                 <input type="submit" name="save" value="Save">
             </div>
+            <input type="checkbox" name="" value="111111" checked>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

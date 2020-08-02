@@ -4,9 +4,17 @@ $query = "SELECT * from product";
 $result = $db->query($query);
 // Xoa 
 if (isset($_GET["action"]) && $_GET["action"] === "delete" && $_GET["pid"]) {
+
     $pid = (int) $_GET["pid"];
+    echo $pid;
     $query = "DELETE from product where id = " . $pid;
-    $db->query($query);
+    $dbresult = $db->query($query);
+    if (!$dbresult) {
+        var_dump($dbresult);
+    } else {
+        $query = "SELECT * from product";
+        $result = $db->query($query);
+    }
 }
 // Sua 
 if (isset($_GET["action"]) && $_GET["action"] === "edit") {
@@ -26,6 +34,22 @@ if (isset($_GET["action"]) && $_GET["action"] === "edit") {
         .badge a {
             color: #fff;
             text-decoration: none;
+        }
+
+        .table-result .row {
+            border-bottom: 1px #222 solid;
+        }
+
+        .row.even {
+            background-color: #eee;
+        }
+
+        .row.odd {
+            background-color: #ccc;
+        }
+
+        .row.first {
+            background-color: aquamarine;
         }
     </style>
 </head>
@@ -62,9 +86,12 @@ if (isset($_GET["action"]) && $_GET["action"] === "edit") {
             <div class="table-header">
                 <div class="row">
                     <div class="col pid">
+                        No.
+                    </div>
+                    <div class="col pid">
                         ID
                     </div>
-                    <div class="col name">
+                    <div class="col-6 name">
                         Name
                     </div>
                     <div class="col price">
@@ -76,20 +103,25 @@ if (isset($_GET["action"]) && $_GET["action"] === "edit") {
                     <div class="col sale">
                         Sale
                     </div>
-                    <div class="col sale">
+                    <div class="col-2 sale">
                         Actions
                     </div>
                 </div>
             </div>
             <div class="table-body">
                 <?php
+                $rowNum = 0;
                 while ($row = $result->fetch_assoc()) {
+                    $rowNum++;
                 ?>
-                    <div class="row">
+                    <div class="row <?php echo ($rowNum % 2 == 0) ? "even" : "odd"; ?>">
+                        <div class="col no">
+                            <?php echo $rowNum; ?>
+                        </div>
                         <div class="col pid">
                             <?php echo $row["id"]; ?>
                         </div>
-                        <div class="col name">
+                        <div class="col-6 name">
                             <?php echo $row["description"]; ?>
                         </div>
                         <div class="col price">
@@ -101,8 +133,8 @@ if (isset($_GET["action"]) && $_GET["action"] === "edit") {
                         <div class="col sale">
                             <?php echo $row["sale"]; ?>
                         </div>
-                        <div class="col sale">
-                            <span class="badge badge-info"><a href="sp.php?action=edit&pid=<?php echo $row["id"]; ?>">Edit</a></span> |
+                        <div class="col-2 sale">
+                            <span class="badge badge-info"><a href="sp_create.php?action=edit&pid=<?php echo $row["id"]; ?>">Edit</a></span> |
                             <span class="badge badge-danger"><a href="sp.php?action=delete&pid=<?php echo $row["id"]; ?>">Delete</a></span>
                         </div>
                     </div>
