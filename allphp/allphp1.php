@@ -10,10 +10,10 @@
 			padding: 10px;
 			text-align: center;
 		}
-		tr: nth-child(even) {
+		tr:nth-child(even) {
 			background-color: lightgreen;
 		}
-		td: hover {
+		td:hover {
 			background-color: yellow;
 		}
 	</style>

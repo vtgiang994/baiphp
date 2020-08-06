@@ -2,16 +2,20 @@
 $dbase = new mysqli("localhost", "root", "", "sanpham");
 $query = "SELECT * from product";
 $result = $dbase->query($query);
+// delete
+// if (isset($_GET["action"]) && $_GET["action"] === "delete" && $_GET["pID"]) {
+//     $pID = (int) $_GET["pID"];
+//     $query = "DELETE from Product where "
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

@@ -3,7 +3,7 @@ $product = false;
 // Khi co action Save
 if (isset($_POST["save"])) {
     var_dump($_POST);
-    $db = new mysqli("localhost", "root","","test");
+    $db = new mysqli("localhost", "root", "", "test");
     $pName = $_POST["pName"];
     $pInventory = $_POST["pInventory"];
     $pPrice = $_POST["pPrice"];
@@ -19,20 +19,20 @@ if (isset($_POST["save"])) {
     } else {
         $query = "INSERT into product (description,price,inventory,sale) values ('$pName', '$pPrice', '$pInventory', '$pSale')";
     }
-    
+
     echo $query;
     $dbresult = $db->query($query);
-    
+
     if (!$dbresult) {
         echo "loi rui";
-        var_dump($dbresult);    
+        var_dump($dbresult);
     }
 } else {
-    
+
     if (isset($_GET["pid"])) {
-        $db = new mysqli("localhost", "root","","test");
+        $db = new mysqli("localhost", "root", "", "test");
         $pid = (int) $_GET["pid"];
-        $query = "SELECT * from product where id = ". $pid;
+        $query = "SELECT * from product where id = " . $pid;
         $result = $db->query($query);
         $product = $result->fetch_row();
         var_dump($product);
@@ -53,7 +53,7 @@ if (isset($_POST["save"])) {
 <body>
     <div class="container">
         <div class="page-header">
-        <div class="menu">
+            <div class="menu">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="#">PRODUCTS</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
