@@ -2,6 +2,18 @@
 $db = new mysqli("localhost", "root", "", "sanpham");
 $query = "SELECT * from category";
 $result = $db->query($query);
+// Delete
+if (isset($_GET["action"]) && $_GET["action"] === "delete" & $_GET["idC"]){
+    $idC = (int) $_GET["idC"];
+    $query = "DELETE FROM category where id = " . $idC;
+    $dbresult = $db->query($query);
+    if (!$result) {
+        var_dump($dbresult);
+    } else{
+        $queyry = "SELECT * from category";
+        $result = $db->query($query);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +40,9 @@ $result = $db->query($query);
                 <div class="col-2"><?php echo $row["id"]; ?></div>
                 <div class="col-2"><?php echo $row["name"]; ?></div>
                 <div class="col-2"><?php echo $row["description"]; ?></div>
+                <div>
+                    <span><a href="category_list?action=delete&idC<?php echo $row["id"]; ?>">Delete</a></span>
+                </div>
             </div>
         <?php
         }
